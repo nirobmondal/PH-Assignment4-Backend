@@ -4,7 +4,7 @@ import { cloudinaryUpload } from "./cloudinary.config";
 
 const storage = new CloudinaryStorage({
   cloudinary: cloudinaryUpload,
-  params: async (req, file) => {
+  params: async (_req, file) => {
     const originalName = file.originalname;
     const extension = originalName.split(".").pop()?.toLocaleLowerCase();
 
@@ -14,7 +14,6 @@ const storage = new CloudinaryStorage({
       .join(".")
       .toLowerCase()
       .replace(/\s+/g, "-")
-      // eslint-disable-next-line no-useless-escape
       .replace(/[^a-z0-9\-]/g, "");
 
     const uniqueName =
