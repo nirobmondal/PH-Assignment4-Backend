@@ -1,0 +1,12 @@
+model Manufacturer {
+  id        String   @id @default(uuid())
+  name      String   @unique
+  country   String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  medicines Medicine[]
+
+  @@index([name])
+  @@map("manufacturers")
+}

@@ -1,0 +1,20 @@
+model SellerOrder {
+  id       String @id @default(uuid())
+  orderId  String
+  sellerId String
+
+  subtotal Decimal @db.Decimal(10, 2)
+
+  order  Order  @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  seller Seller @relation(fields: [sellerId], references: [id], onDelete: Restrict)
+
+  items OrderItem[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([orderId, sellerId])
+  @@index([sellerId])
+  @@index([orderId])
+  @@map("seller_orders")
+}
